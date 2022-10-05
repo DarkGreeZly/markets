@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}User page{% endblock %}
+{% block body %}
+<main>
+  <section class="py-5 text-center container">
+    <div class="row py-lg-5">
+      <div class="col-lg-6 col-md-8 mx-auto">
+        <h1 class="fw-light">List of markets</h1>
+        <p>
+          {% if current_user.admin %}
+          <br/>
+          <a href="createmarket" class="btn btn-primary my-2">Create market</a>
+          {% endif %}
+        </p>
+      </div>
+    </div>
+  </section>
+      <div class="album py-5 bg-light">
+        <div class="container">
+          <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            {% if data|length > 0 %}
+              {% for market in data %}
+                <div class="col">
+                  <a href="market/{{ market.id }}" style="color: black;">
+                    <div class="card shadow-sm">
+                        <img src="{{ market.img_url }}" class="rounded card-img-top" alt="market"/>
+                        <p class="p-2 card-text">{{ market.title }}</p>
+                    </div>
+                  </a>
+                </div>
+              {% endfor %}
+            {% else %}
+              <h4>Any of markets doesnt exists</h4>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+</main>
+{% endblock %}
